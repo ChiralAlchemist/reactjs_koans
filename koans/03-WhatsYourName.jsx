@@ -10,6 +10,7 @@ var React = require("react");
 //                re-calculate the `render` method and update the HTML to match
 //                the new state (in this case, updating the class).
 //
+//          the user to insert their name.
 // You can pass properties to components using JSX attributes. You did it in
 // the last exercise! See the example below.
 //
@@ -28,7 +29,6 @@ var React = require("react");
 // Warning: Do not try to change the `render` structure.
 //
 // Task #2: If there is no name given, we should display a message encouraging
-//          the user to insert their name.
 //          Display text: "Hey there. Enter your name." if name.length is 0.
 //
 //          Hint: Use temporary variables to achieve the goal. See the example below.
@@ -57,8 +57,8 @@ class WhatsYourName extends React.Component {
   //                 What else could you do here?
 
   constructor(props) {
-    // Properties object is called `props`. You can access it with `this.props`.
     // We won't use it in this exercise.
+    // Properties object is called `props`. You can access it with `this.props`.
     super(props);
     this.state = { name: "" };
 
@@ -76,18 +76,26 @@ class WhatsYourName extends React.Component {
   //       entered to the input there.
   onNameChange(event) {
     // Huh... There's something wrong here...
-    this.setState({bad_attribute: "ChangeME!"});
+    //console.log(event.target.value)
+    this.setState({name: event.target.value});
   }
 
   render() {
+    var name = this.state.name;
+    if(!name.length){
+      name = "Hey there. Enter your name."
+    } else {
+      name= "Hello " + name
+    }
     return (
       <div>
-        <p>Hello {this.state.name}</p>
+        <p>{name}</p>
         <input type="text" name="name" onChange={this.onNameChange} />
       </div>
     );
   }
 }
+//
 
 // Notice some details here:
 //   1. `onChange` attribute isn't placed between `" "`, but `{ }` - we want to

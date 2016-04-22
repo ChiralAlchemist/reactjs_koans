@@ -54,7 +54,13 @@ class GroceryList extends React.Component {
     this.clearList = this.clearList.bind(this);
     this.inputChanged = this.inputChanged.bind(this);
   }
+  componentDidMount() {
+    // Task 1: Display a message "I'm mounted!" in developer's console when the
+    //         component finishes mounting.
+    //         Use `console.log` function for it.
+    console.log("I'm mounted!")
 
+  }
   inputChanged(event) {
     this.setState({ newGroceryName: event.target.value });
   }
@@ -76,6 +82,14 @@ class GroceryList extends React.Component {
   // Hint 1: Pay attention to the element's index on the list.
   toggleGroceryCompleteness(groceryIndex) {
     // Put your code here
+    this.setState( {
+      groceries: this.state.groceries.map(function (item,index){
+        if(index===groceryIndex){
+          item.completed = !item.completed;
+        }
+        return item;
+      })})
+
   }
 
   render() {

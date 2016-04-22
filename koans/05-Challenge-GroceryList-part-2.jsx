@@ -42,15 +42,25 @@ class GroceryList extends React.Component {
   // Hint #1: You should use the `concat` function to modify groceries list.
   // Hint #2: Remember about the case where input is empty.
   // Hint #3: Name of the new grocery item will be stored in `this.state.newGroceryName`.
-  addGroceryItem() {
-    // Put your code here
+  addGroceryItem(event) {
+    console.log("i ran")
+    if(this.state.newGroceryName.length!==0){
+      console.log('attemped to run')
+      this.setState({
+        groceries : this.state.groceries.concat([{name: this.state.newGroceryName}]),
+        newGroceryName : ""
+    });
+      console.log(this.state.groceries)
+    }
+
+
   }
 
   render() {
     let groceriesComponents = [],
         newProductInput,
         newProductAddButton;
-
+    var placeholder = this.state.newGroceryName
     for(var index = 0; index < this.state.groceries.length; index++) {
       groceriesComponents.push(
           <GroceryListItem
@@ -60,15 +70,17 @@ class GroceryList extends React.Component {
     }
 
     // Here are components for task #2.
-    newProductInput = <input className='new-item' type="text" onChange={this.inputChanged}/>;
+    newProductInput = <input className='new-item' type="text" onChange={this.inputChanged} placeholder={placeholder} />;
     // Something is missing here... Will anything happen if you click this button now?
-    newProductAddButton = <button className='add-product'>Add new Product</button>;
+    newProductAddButton = <button className='add-product' onClick={this.addGroceryItem}>Add new Product</button>;
 
     return (
       <div>
         <ul>
           {groceriesComponents}
         </ul>
+        <div> {newProductInput}</div>
+        <div> {newProductAddButton}</div>
       </div>
     );
   }
